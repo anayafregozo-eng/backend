@@ -1,0 +1,711 @@
+{
+  "intents": [
+    {
+  "tag": "ayuda",
+  "patterns": [
+    "ayuda",
+    "necesito ayuda",
+    "puedes ayudarme",
+    "qué puedes hacer",
+    "en qué me puedes ayudar",
+    "cómo funciona esto",
+    "qué hago aquí",
+    "explícame el sistema",
+    "qué opciones tengo",
+    "para qué sirves",
+    "cómo uso el sistema",
+    "qué puedo hacer",
+    "dime qué puedes hacer",
+    "ayúdame por favor",
+    "necesito soporte",
+    "qué hace este chatbot",
+    "cómo usar inventario",
+    "ayuda con inventario",
+    "qué funciones tienes",
+    "qué comandos hay"
+  ],
+  "responses": [
+    "Puedo ayudarte a consultar inventario, buscar productos, agregar artículos, actualizar stock y revisar alertas.",
+    "Te puedo apoyar con tareas del sistema, como ver productos, consultar existencias o ubicar módulos.",
+    "Puedo orientarte en inventario, productos, ventas, proveedores, usuarios y alertas del sistema.",
+    "Si quieres, puedes preguntarme sobre stock, productos disponibles, alertas o funciones del sistema."
+  ]
+},
+    {
+  "tag": "stock_total",
+  "patterns": [
+    "cuántos productos hay",
+    "total de productos",
+    "cantidad total de inventario",
+    "cuántos artículos tengo",
+    "inventario total",
+    "número de productos",
+    "cuántos productos hay en total",
+    "total de artículos",
+    "stock total",
+    "cantidad en inventario",
+    "cuántos productos existen",
+    "total de mercancía",
+    "productos totales",
+    "cuántas unidades hay",
+    "inventario general",
+    "total almacenado",
+    "cantidad de productos",
+    "cuántos artículos hay",
+    "ver total de stock",
+    "resumen de inventario"
+  ],
+  "responses": [
+    "Puedes ver el total en el dashboard.",
+    "El sistema muestra el total de productos en el panel principal.",
+    "Consulta el dashboard para ver el resumen."
+  ]
+},{
+  "tag": "errores_sistema",
+  "patterns": [
+    "no funciona",
+    "hay un error",
+    "el sistema falla",
+    "no puedo hacer esto",
+    "algo salió mal",
+    "no carga",
+    "no responde",
+    "hay un problema",
+    "falló el sistema",
+    "error en inventario",
+    "no sirve",
+    "no funciona bien",
+    "problema en el sistema",
+    "no puedo agregar",
+    "no puedo eliminar",
+    "no carga la página",
+    "error en productos",
+    "no abre",
+    "no funciona el módulo",
+    "algo anda mal"
+  ],
+  "responses": [
+    "Parece que hay un problema. Intenta recargar la página.",
+    "Verifica tu conexión o intenta nuevamente.",
+    "Si el problema continúa, revisa el sistema."
+  ]
+},{
+  "tag": "proveedores_info",
+  "patterns": [
+    "ver proveedores",
+    "lista de proveedores",
+    "mostrar proveedores",
+    "qué proveedores hay",
+    "proveedores registrados",
+    "ver lista de proveedores",
+    "consultar proveedores",
+    "información de proveedores",
+    "proveedores del sistema",
+    "dime los proveedores",
+    "quién suministra productos",
+    "proveedores actuales",
+    "ver datos de proveedores",
+    "lista de suministradores",
+    "ver proveedores disponibles",
+    "proveedores existentes",
+    "consultar lista",
+    "proveedores activos",
+    "ver proveedores registrados",
+    "datos de proveedores"
+  ],
+  "responses": [
+    "Puedes ver los proveedores en su módulo correspondiente.",
+    "Consulta la sección de proveedores para ver la lista.",
+    "Ahí encontrarás toda la información."
+  ]
+},{
+  "tag": "usuarios_info",
+  "patterns": [
+    "ver usuarios",
+    "lista de usuarios",
+    "mostrar usuarios",
+    "qué usuarios hay",
+    "usuarios registrados",
+    "ver lista de usuarios",
+    "consultar usuarios",
+    "información de usuarios",
+    "usuarios del sistema",
+    "dime los usuarios",
+    "quién usa el sistema",
+    "usuarios actuales",
+    "ver datos de usuarios",
+    "lista de administradores",
+    "ver usuarios disponibles",
+    "usuarios existentes",
+    "consultar lista",
+    "usuarios activos",
+    "ver usuarios registrados",
+    "datos de usuarios"
+  ],
+  "responses": [
+    "Puedes ver los usuarios en su módulo.",
+    "Consulta la sección de usuarios para más información.",
+    "Ahí encontrarás todos los registros."
+  ]
+},{
+  "tag": "finanzas_info",
+  "patterns": [
+    "ver finanzas",
+    "mostrar finanzas",
+    "estado financiero",
+    "dinero del sistema",
+    "ingresos",
+    "ganancias",
+    "resumen financiero",
+    "balance",
+    "ver ingresos",
+    "finanzas actuales",
+    "dinero generado",
+    "resumen de dinero",
+    "ver ganancias",
+    "datos financieros",
+    "ver balance",
+    "cuánto dinero hay",
+    "estado de cuentas",
+    "finanzas del sistema",
+    "consultar finanzas",
+    "ver reporte financiero"
+  ],
+  "responses": [
+    "Puedes ver las finanzas en su módulo.",
+    "Consulta el módulo financiero para ver ingresos y gastos.",
+    "Ahí encontrarás el resumen financiero."
+  ]
+},{
+  "tag": "notificaciones",
+  "patterns": [
+    "ver notificaciones",
+    "hay alertas",
+    "mostrar notificaciones",
+    "alertas activas",
+    "notificaciones del sistema",
+    "ver alertas",
+    "qué alertas hay",
+    "notificaciones actuales",
+    "avisos del sistema",
+    "mensajes del sistema",
+    "ver avisos",
+    "alertas disponibles",
+    "notificaciones recientes",
+    "ver mensajes",
+    "alertas del inventario",
+    "notificaciones activas",
+    "avisos importantes",
+    "mensajes importantes",
+    "ver alertas del sistema",
+    "notificaciones nuevas"
+  ],
+  "responses": [
+    "Puedes ver las notificaciones en el módulo de alertas.",
+    "Ahí encontrarás todas las alertas activas.",
+    "Consulta la sección de alertas para más información."
+  ]
+},{
+  "tag": "reinicio_sistema",
+  "patterns": [
+    "reiniciar sistema",
+    "resetear sistema",
+    "volver a empezar",
+    "reiniciar aplicación",
+    "resetear datos",
+    "reiniciar inventario",
+    "empezar de nuevo",
+    "reiniciar todo",
+    "volver al inicio",
+    "resetear app",
+    "reiniciar datos",
+    "limpiar sistema",
+    "borrar todo",
+    "reinicio general",
+    "reiniciar configuración",
+    "resetear configuración",
+    "volver a cero",
+    "reiniciar sistema completo",
+    "resetear todo",
+    "reiniciar programa"
+  ],
+  "responses": [
+    "No se recomienda reiniciar el sistema sin autorización.",
+    "Consulta con un administrador antes de reiniciar.",
+    "Esta acción requiere permisos especiales."
+  ]
+},{
+  "tag": "quien_eres",
+  "patterns": [
+    "quién eres",
+    "qué eres",
+    "eres un bot",
+    "eres humano",
+    "quién te creó",
+    "qué haces",
+    "cómo te llamas",
+    "qué eres tú",
+    "eres inteligencia artificial",
+    "eres un programa",
+    "qué tipo de sistema eres",
+    "eres chatbot",
+    "quién hizo este sistema",
+    "eres real",
+    "eres asistente",
+    "qué tipo de bot eres",
+    "quién te programó",
+    "qué eres exactamente",
+    "eres una IA",
+    "cómo funcionas"
+  ],
+  "responses": [
+    "Soy un asistente virtual del sistema Smart Inventory.",
+    "Soy un chatbot diseñado para ayudarte con el inventario.",
+    "Estoy aquí para asistirte en el sistema."
+  ]
+},
+    {
+  "tag": "ventas_info",
+  "patterns": [
+    "ver ventas",
+    "mostrar ventas",
+    "historial de ventas",
+    "qué ventas hay",
+    "lista de ventas",
+    "consultar ventas",
+    "ventas realizadas",
+    "ver registros de ventas",
+    "ventas del día",
+    "ventas recientes",
+    "cuántas ventas hay",
+    "ventas del sistema",
+    "ver compras realizadas",
+    "mostrar historial",
+    "ventas actuales",
+    "quiero ver ventas",
+    "dime las ventas",
+    "ver ventas registradas",
+    "datos de ventas",
+    "información de ventas"
+  ],
+  "responses": [
+    "Puedes ver las ventas en el módulo de ventas.",
+    "Ahí encontrarás el historial completo de ventas.",
+    "Dirígete a ventas para más detalles."
+  ]
+},
+    {
+    "tag": "navegacion_modulos",
+    "patterns": [
+        "abre productos",
+        "ir a productos",
+        "quiero ver productos",
+        "llévame a ventas",
+        "abre el módulo de ventas",
+        "quiero ir a usuarios",
+        "abre usuarios",
+        "muéstrame proveedores",
+        "ir a finanzas",
+        "abre alertas",
+        "ir al dashboard",
+        "regresa al inicio",
+        "quiero ver el panel",
+        "navegar a productos",
+        "abre inventario",
+        "cambiar de módulo",
+        "muéstrame el dashboard",
+        "abre el panel principal",
+        "quiero ir a alertas",
+        "llévame a finanzas"
+    ],
+    "responses": [
+        "Abriendo módulo...",
+        "Te llevo a esa sección.",
+        "Cambiando de pantalla."
+    ]
+    },
+    
+    {
+      "tag": "saludo",
+      "patterns": [
+        "hola",
+        "buenas",
+        "hey",
+        "qué tal",
+        "hola chatbot",
+        "buenos días",
+        "buenas tardes",
+        "buenas noches",
+        "hola cómo estás",
+        "qué onda",
+        "hola amigo",
+        "saludos",
+        "hola sistema",
+        "hola asistente",
+        "ey",
+        "qué haces",
+        "hola que tal",
+        "holi",
+        "holaaa",
+        "hola bot"
+      ],
+      "responses": [
+        "Hola ¿En qué puedo ayudarte?",
+        "¡Hola! ¿Qué necesitas hacer en el sistema?",
+        "Hola, estoy lista para ayudarte con el inventario."
+      ]
+    },
+    {
+      "tag": "ayuda",
+      "patterns": [
+        "ayuda",
+        "necesito ayuda",
+        "puedes ayudarme",
+        "qué puedes hacer",
+        "cómo funciona esto",
+        "qué hago aquí",
+        "explícame el sistema",
+        "qué opciones tengo",
+        "para qué sirves",
+        "cómo uso el sistema",
+        "qué puedo hacer",
+        "dime qué puedes hacer",
+        "ayúdame por favor",
+        "necesito soporte",
+        "qué hace este chatbot",
+        "cómo usar inventario",
+        "ayuda con inventario",
+        "qué funciones tienes",
+        "qué me puedes ayudar",
+        "qué comandos hay"
+      ],
+      "responses": [
+        "Puedo ayudarte a consultar inventario, agregar productos, actualizar stock y más.",
+        "Puedes preguntarme sobre productos, stock o cómo usar el sistema.",
+        "Estoy aquí para ayudarte con el inventario."
+      ]
+    },
+    {
+      "tag": "agradecimiento",
+      "patterns": [
+        "gracias",
+        "muchas gracias",
+        "te lo agradezco",
+        "gracias chatbot",
+        "thanks",
+        "thank you",
+        "gracias por tu ayuda",
+        "te agradezco mucho",
+        "ok gracias",
+        "vale gracias",
+        "perfecto gracias",
+        "muy amable",
+        "se agradece",
+        "gracias bro",
+        "gracias amigo",
+        "mil gracias",
+        "gracias sistema",
+        "gracias por todo",
+        "genial gracias",
+        "listo gracias"
+      ],
+      "responses": [
+        "De nada.",
+        "Para eso estoy.",
+        "Con gusto, cualquier cosa aquí estoy."
+      ]
+    },
+    {
+      "tag": "despedida",
+      "patterns": [
+        "adiós",
+        "hasta luego",
+        "nos vemos",
+        "bye",
+        "hasta pronto",
+        "me voy",
+        "ya es todo",
+        "gracias adiós",
+        "hasta mañana",
+        "chao",
+        "nos vemos luego",
+        "me retiro",
+        "hasta la próxima",
+        "bye bye",
+        "hasta luego chatbot",
+        "ya terminé",
+        "fin",
+        "eso es todo",
+        "listo me voy",
+        "hasta después"
+      ],
+      "responses": [
+        "Hasta luego.",
+        "Nos vemos pronto.",
+        "Que tengas un buen día."
+      ]
+    },
+    {
+      "tag": "buscar_producto",
+      "patterns": [
+        "buscar producto",
+        "quiero buscar un producto",
+        "encuentra el producto laptop",
+        "busca el artículo mouse",
+        "localiza un producto",
+        "quiero encontrar un producto",
+        "dónde está el producto",
+        "existe el producto laptop",
+        "buscar en inventario",
+        "encuentra este producto",
+        "ver si existe un producto",
+        "buscar artículo",
+        "dime si hay laptops",
+        "hay mouse en inventario",
+        "quiero saber si hay stock",
+        "buscar mercancía",
+        "ver producto específico",
+        "consultar producto",
+        "producto disponible",
+        "existe este artículo"
+      ],
+      "responses": [
+        "Puedes buscar productos desde el módulo de productos.",
+        "Usa el buscador del sistema para encontrar artículos.",
+        "Ahí podrás verificar si el producto existe."
+      ]
+    },
+    {
+      "tag": "funciones_sistema",
+      "patterns": [
+        "qué hace el sistema",
+        "para qué sirve este sistema",
+        "qué funcionalidades tiene",
+        "qué incluye el sistema",   
+        "qué módulos hay",
+        "qué puedo hacer aquí",
+        "qué opciones hay",
+        "qué tiene el sistema",
+        "funciones del inventario",
+        "qué herramientas hay",
+        "qué incluye el dashboard",
+        "qué puedo gestionar",
+        "qué administra este sistema",
+        "qué hace este software",
+        "para qué sirve inventario",
+        "qué permite hacer",
+        "qué controla el sistema",
+        "qué gestiona",
+        "qué administra",
+        "qué incluye"
+      ],
+      "responses": [
+        "El sistema permite gestionar productos, ventas, proveedores y alertas.",
+        "Puedes administrar inventario, usuarios y finanzas.",
+        "Incluye módulos de productos, ventas, alertas y más."
+      ]
+    },
+    {
+      "tag": "desconocido",
+      "patterns": [
+        "xxxx"
+      ],
+      "responses": [
+        "No entendí muy bien, ¿puedes escribirlo de otra forma?",
+        "No estoy segura de lo que necesitas, intenta preguntarlo diferente.",
+        "¿Podrías explicarlo con otras palabras?"
+      ]
+    },
+    {
+      "tag": "consultar_inventario",
+      "patterns": [
+        "qué hay en stock",
+        "que hay en stock",
+        "hay productos",
+        "hay coca",
+        "cuantas cocas hay",
+        "cuántas cocas hay en stock",
+        "stock de coca",
+        "cuanto stock hay",
+        "cuántos productos hay",
+        "dime el stock",
+        "ver stock",
+        "¿Qué productos hay en inventario?",
+        "Muéstrame todos los artículos disponibles",
+        "¿Qué tengo en stock?",
+        "Lista de productos",
+        "Ver inventario actual",
+        "Enséñame el inventario",
+        "Quiero ver el inventario",
+        "¿Qué artículos están registrados?",
+        "Mostrar todos los productos",
+        "Consulta de inventario",
+        "¿Qué mercancía hay disponible?",
+        "Dime qué productos tengo",
+        "Ver todos los artículos",
+        "Inventario completo",
+        "Quiero consultar el stock",
+        "¿Qué hay almacenado?",
+        "Mostrar existencias",
+        "¿Qué productos están disponibles ahorita?",
+        "Dame la lista del inventario",
+        "Quiero saber qué hay en almacén"
+      ],
+      "responses": [
+        "Puedes revisar los productos en la sección de inventario.",
+        "Aquí puedes ver todos los artículos disponibles.",
+        "Consulta el módulo de productos para ver el inventario completo."
+      ]
+    },
+    {
+      "tag": "agregar_producto",
+      "patterns": [
+        "Quiero agregar un producto",
+        "Añadir nuevo artículo",
+        "Registrar producto nuevo",
+        "Agrega 10 laptops al inventario",
+        "Ingresar producto",
+        "Quiero registrar un artículo",
+        "Añade un nuevo producto",
+        "Meter producto al inventario",
+        "Dar de alta un producto",
+        "Quiero guardar un nuevo artículo",
+        "Registrar mercancía nueva",
+        "Agregar artículos al sistema",
+        "Añadir producto al almacén",
+        "Quiero subir un producto",
+        "Inserta un nuevo producto",
+        "Capturar producto",
+        "Necesito agregar mercancía",
+        "Agrega este artículo",
+        "Quiero ingresar un nuevo producto",
+        "Sumar producto al inventario"
+      ],
+      "responses": [
+        "Puedes agregar productos desde la sección de productos.",
+        "Dirígete al módulo de productos para registrar un nuevo artículo.",
+        "Ahí podrás ingresar nombre, stock y precio del producto."
+      ]
+    },
+    {
+      "tag": "eliminar_producto",
+      "patterns": [
+        "Eliminar producto",
+        "Borra el artículo mouse",
+        "Quitar producto del inventario",
+        "Elimina este producto",
+        "Remover artículo",
+        "Quiero borrar un producto",
+        "Elimina la laptop del sistema",
+        "Quita este artículo",
+        "Deseo eliminar mercancía",
+        "Borra un producto del inventario",
+        "Remueve este registro",
+        "Quiero quitar un artículo",
+        "Eliminar un artículo del almacén",
+        "Borrar producto registrado",
+        "Quitar mercancía",
+        "Deseo remover un producto",
+        "Elimina el producto teclado",
+        "Saca este artículo del inventario",
+        "Quiero borrar ese producto",
+        "Retira este producto del sistema"
+      ],
+      "responses": [
+        "Puedes eliminar productos desde el módulo de productos.",
+        "Selecciona el producto y usa la opción eliminar.",
+        "Confirma la eliminación para quitar el artículo del sistema."
+      ]
+    },
+    {
+      "tag": "actualizar_stock",
+      "patterns": [
+        "Actualiza el stock de laptops a 20",
+        "Cambiar cantidad de producto",
+        "Modificar inventario",
+        "Ajustar stock",
+        "Editar cantidad disponible",
+        "Quiero cambiar el stock",
+        "Actualiza las existencias",
+        "Modifica la cantidad del producto",
+        "Cambia el inventario de mouse",
+        "Ajusta la cantidad disponible",
+        "Edita el stock del artículo",
+        "Quiero actualizar un producto",
+        "Cambia las unidades disponibles",
+        "Modifica el número de piezas",
+        "Ajusta el inventario del producto",
+        "Pon el stock en 15",
+        "Quiero editar las existencias",
+        "Actualiza la cantidad en almacén",
+        "Cambia cuántos productos hay",
+        "Modifica el stock actual"
+      ],
+      "responses": [
+        "Puedes actualizar el stock desde la sección de productos.",
+        "Selecciona el producto y edita la cantidad disponible.",
+        "Ahí puedes modificar las existencias fácilmente."
+      ]
+    },
+    {
+      "tag": "alertas_stock",
+      "patterns": [
+        "¿Qué productos están por agotarse?",
+        "Mostrar productos con poco stock",
+        "¿Hay artículos bajos?",
+        "Alertas de inventario",
+        "Productos críticos",
+        "¿Qué productos tienen pocas existencias?",
+        "Muéstrame el inventario bajo",
+        "¿Qué artículos están por terminarse?",
+        "Lista de productos con stock bajo",
+        "Ver productos críticos",
+        "¿Qué mercancía está a punto de agotarse?",
+        "Dame las alertas de inventario bajo",
+        "Mostrar artículos con pocas unidades",
+        "¿Qué productos necesitan reabastecimiento?",
+        "Productos con existencias mínimas",
+        "Enséñame los productos casi agotados",
+        "¿Hay productos en nivel crítico?",
+        "Ver alertas de stock",
+        "Dime qué productos están bajos",
+        "¿Qué artículos requieren reposición?"
+      ],
+      "responses": [
+        "Puedes revisar las alertas en el módulo de alertas.",
+        "Ahí verás los productos con bajo stock.",
+        "Te recomiendo revisar la sección de alertas para más detalles."
+      ]
+    },
+    {
+      "tag": "info_producto",
+      "patterns": [
+        "Información del producto laptop",
+        "Detalles del artículo mouse",
+        "¿Qué características tiene este producto?",
+        "Ver información de producto",
+        "Datos del producto",
+        "Muéstrame la información del artículo",
+        "Quiero saber más de este producto",
+        "Dame los detalles de la laptop",
+        "Consultar información del producto",
+        "¿Qué datos tiene este artículo?",
+        "Ver ficha del producto",
+        "Quiero ver las características del mouse",
+        "Información detallada del artículo",
+        "Enséñame los datos del producto",
+        "¿Qué contiene este producto?",
+        "Muéstrame la descripción del artículo",
+        "Consulta del producto",
+        "Quiero ver la información de ese artículo",
+        "Dime los detalles del producto",
+        "¿Cuál es la información de este producto?"
+      ],
+      "responses": [
+        "Puedes ver los detalles del producto en la sección de productos.",
+        "Ahí encontrarás información como precio, stock y proveedor.",
+        "Consulta el producto en el sistema para ver sus características."
+      ]
+    }
+  ]
+}
