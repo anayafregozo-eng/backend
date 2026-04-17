@@ -8,6 +8,10 @@ import unicodedata
 from nltk.stem import WordNetLemmatizer
 from keras.models import load_model
 
+nltk.download('punkt')
+nltk.download('punkt_tab')
+nltk.download('wordnet')
+
 lemmatizer = WordNetLemmatizer()
 
 with open("intents.json", encoding="utf-8") as file:
