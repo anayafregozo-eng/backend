@@ -1,3 +1,4 @@
+import os
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from chatbot import chatbot_reply
@@ -7,23 +8,17 @@ CORS(app)
 
 @app.route("/")
 def home():
-    return "Chatbot funcionando 🚀"
+    return "Backend funcionando 🚀"
 
 @app.route("/chat", methods=["POST"])
 def chat():
-    data = request.get_json(silent=True)
+    data = request.get_json()
 
-    if not data or "mensaje" not in data:
-        return jsonify({"respuesta": "No se recibió ningún mensaje."}), 400
-
-    mensaje = str(data["mensaje"]).strip()
+    mensaje = data.get("mensaje", "")
     inventario = data.get("inventario", [])
-    ruta_actual = data.get("rutaActual", "")
+    ruta = data.get("rutaActual", "")
 
-    if not mensaje:
-        return jsonify({"respuesta": "Escribe un mensaje para poder ayudarte."}), 400
-
-    result = chatbot_reply(mensaje, inventario, ruta_actual)
+    result = chatbot_reply(mensaje, inventario, ruta)
 
     return jsonify({
         "respuesta": result["response"],
@@ -32,4 +27,5 @@ def chat():
     })
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
