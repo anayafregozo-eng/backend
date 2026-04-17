@@ -12,13 +12,19 @@ def home():
 
 @app.route("/chat", methods=["POST"])
 def chat():
-    data = request.get_json()
+    data = request.get_json(silent=True)
 
-    mensaje = data.get("mensaje", "")
+    if not data or "mensaje" not in data:
+        return jsonify({"respuesta": "No se recibió ningún mensaje."}), 400
+
+    mensaje = str(data["mensaje"]).strip()
     inventario = data.get("inventario", [])
-    ruta = data.get("rutaActual", "")
+    ruta_actual = data.get("rutaActual", "")
 
-    result = chatbot_reply(mensaje, inventario, ruta)
+    if not mensaje:
+        return jsonify({"respuesta": "Escribe un mensaje para poder ayudarte."}), 400
+
+    result = chatbot_reply(mensaje, inventario, ruta_actual)
 
     return jsonify({
         "respuesta": result["response"],
