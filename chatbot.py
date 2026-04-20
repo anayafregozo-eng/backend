@@ -5,12 +5,14 @@ import numpy as np
 import nltk
 import re
 import unicodedata
+from difflib import SequenceMatcher
 from nltk.stem import WordNetLemmatizer
 from keras.models import load_model
 
 nltk.download('punkt')
 nltk.download('punkt_tab')
 nltk.download('wordnet')
+
 lemmatizer = WordNetLemmatizer()
 
 with open("intents.json", encoding="utf-8") as file:
@@ -34,12 +36,12 @@ context = {
 }
 
 KNOWN_MODULES = {
-    "productos": ["productos", "inventario", "almacen", "almacén"],
+    "productos": ["productos", "producto", "inventario", "almacen", "almacén"],
     "ventas": ["ventas", "venta"],
     "usuarios": ["usuarios", "usuario"],
     "proveedores": ["proveedores", "proveedor"],
-    "finanzas": ["finanzas", "financiero"],
-    "alertas": ["alertas", "notificaciones", "avisos"],
+    "finanzas": ["finanzas", "financiero", "dinero", "ingresos", "gastos"],
+    "alertas": ["alertas", "alerta", "notificaciones", "notificacion", "avisos", "iot"],
     "dashboard": ["dashboard", "inicio", "panel"]
 }
 
@@ -54,12 +56,38 @@ FALLBACK_PRODUCTS = [
     "monitor", "monitores", "impresora", "impresoras", "cable", "cables"
 ]
 
+INTENT_KEYWORDS = {
+    "consultar_inventario": [
+        "stock", "existencia", "existencias", "inventario", "productos",
+        "articulos", "artículos", "almacen", "almacén", "disponible", "disponibles",
+        "hay", "cuantos", "cuántos", "cuantas", "cuántas"
+    ],
+    "alertas_stock": [
+        "alerta", "alertas", "urgente", "urgentes", "agotado", "agotados",
+        "bajo", "bajos", "critico", "crítico", "reponer", "reposicion", "reposición"
+    ],
+    "buscar_producto": [
+        "buscar", "encuentra", "localiza", "ubica", "existe", "tienen"
+    ],
+    "info_producto": [
+        "detalle", "detalles", "informacion", "información", "precio",
+        "proveedor", "tipo", "caracteristicas", "características"
+    ],
+    "navegacion_modulos": [
+        "abre", "abrir", "ir", "entra", "entrar", "modulo", "módulo",
+        "llevame", "llévame", "mostrar", "muestra"
+    ]
+}
+
 def normalize_text(text: str) -> str:
     text = text.lower().strip()
     text = unicodedata.normalize("NFKD", text).encode("ascii", "ignore").decode("utf-8")
     text = re.sub(r"[^\w\s]", " ", text)
     text = re.sub(r"\s+", " ", text).strip()
     return text
+
+def similarity(a: str, b: str) -> float:
+    return SequenceMatcher(None, a, b).ratio()
 
 def clean_up_sentence(sentence: str):
     sentence = normalize_text(sentence)
@@ -111,10 +139,19 @@ def extract_quantity(text: str):
     return None
 
 def extract_module(text: str):
+    text_norm = normalize_text(text)
+
     for module, aliases in KNOWN_MODULES.items():
         for alias in aliases:
-            if alias in text:
+            alias_norm = normalize_text(alias)
+
+            if alias_norm in text_norm:
                 return module
+
+            for token in text_norm.split():
+                if similarity(token, alias_norm) >= 0.84:
+                    return module
+
     return None
 
 def looks_like_help(text: str):
@@ -123,42 +160,96 @@ def looks_like_help(text: str):
 def normalizar_nombre(texto: str) -> str:
     return normalize_text(texto)
 
+def detect_intent_by_keywords(text: str):
+    text_norm = normalize_text(text)
+    tokens = set(text_norm.split())
+
+    best_intent = None
+    best_score = 0
+
+    for intent, keywords in INTENT_KEYWORDS.items():
+        score = 0
+
+        for kw in keywords:
+            kw_norm = normalize_text(kw)
+
+            if kw_norm in text_norm:
+                score += 2
+                continue
+
+            for token in tokens:
+                if similarity(token, kw_norm) >= 0.82:
+                    score += 1
+
+        if score > best_score:
+            best_score = score
+            best_intent = intent
+
+    if best_score >= 2:
+        return best_intent
+
+    return None
+
 def extract_product_from_inventory(text: str, inventario):
     normalized_text = normalize_text(text)
 
-    if inventario:
-        mejor_match = None
-        mejor_score = 0
+    if not inventario:
+        return None
 
-        for item in inventario:
-            nombre = item.get("nombre", "")
-            nombre_norm = normalize_text(nombre)
+    mejor_match = None
+    mejor_score = 0
 
-            palabras = nombre_norm.split()
+    for item in inventario:
+        nombre = item.get("nombre", "")
+        nombre_norm = normalize_text(nombre)
 
-            score = 0
-            for p in palabras:
-                if p in normalized_text:
-                    score += 1
+        if not nombre_norm:
+            continue
 
-            if score > mejor_score:
-                mejor_score = score
-                mejor_match = nombre
+        if nombre_norm in normalized_text:
+            return nombre
 
-        return mejor_match
+        palabras_producto = nombre_norm.split()
+        score = 0
 
-    return None
+        for palabra in palabras_producto:
+            if palabra in normalized_text:
+                score += 2
+            else:
+                for token in normalized_text.split():
+                    if similarity(token, palabra) >= 0.82:
+                        score += 1
+
+        score += similarity(normalized_text, nombre_norm)
+
+        if score > mejor_score:
+            mejor_score = score
+            mejor_match = nombre
+
+    return mejor_match if mejor_score >= 1.8 else None
 
 def buscar_producto_en_inventario(nombre_producto, inventario):
     if not nombre_producto:
         return None
 
     objetivo = normalizar_nombre(nombre_producto)
+    mejor_match = None
+    mejor_score = 0
 
     for item in inventario:
         nombre = normalizar_nombre(item.get("nombre", ""))
+
         if objetivo in nombre or nombre in objetivo:
             return item
+
+        score = similarity(objetivo, nombre)
+
+        if score > mejor_score:
+            mejor_score = score
+            mejor_match = item
+
+    if mejor_score >= 0.72:
+        return mejor_match
 
     return None
 
@@ -183,15 +274,44 @@ def analyze_message(message: str, inventario=None):
     quantity = extract_quantity(normalized)
     module = extract_module(normalized)
 
+    keyword_intent = detect_intent_by_keywords(normalized)
+
     if looks_like_help(normalized):
         best_intent = "ayuda"
 
-    # Regla extra para preguntas de stock / existencia
-    if "stock" in normalized or "hay" in normalized or "cuantas" in normalized or "cuántas" in message.lower():
+    # navegación directa por módulo
+    if module:
+        palabras_modulo = KNOWN_MODULES.get(module, []) + [module]
+        if normalized in [normalize_text(x) for x in palabras_modulo]:
+            best_intent = "navegacion_modulos"
+
+    # intención inferida por palabras relacionadas
+    if keyword_intent and best_prob < 0.80:
+        best_intent = keyword_intent
+
+    # reglas específicas para inventario
+    if any(p in normalized for p in ["stock", "hay", "existencia", "existencias", "inventario", "disponible"]):
         if product:
             best_intent = "consultar_inventario"
+        elif not keyword_intent:
+            best_intent = "consultar_inventario"
 
-    if best_prob < ERROR_THRESHOLD and best_intent != "ayuda" and best_intent != "consultar_inventario":
+    # reglas específicas para alertas
+    if any(p in normalized for p in ["alerta", "alertas", "urgente", "agotado", "agotados", "bajo stock", "critico", "crítico"]):
+        best_intent = "alertas_stock"
+
+    # buscar producto si parece consulta de existencia
+    if product and any(p in normalized for p in ["buscar", "encuentra", "localiza", "existe", "tienen"]):
+        best_intent = "buscar_producto"
+
+    # info de producto si pregunta por precio/proveedor/tipo
+    if product and any(p in normalized for p in ["precio", "proveedor", "tipo", "detalle", "detalles", "informacion", "información"]):
+        best_intent = "info_producto"
+
+    if best_prob < ERROR_THRESHOLD and not keyword_intent and best_intent not in [
+        "ayuda", "consultar_inventario", "alertas_stock", "navegacion_modulos",
+        "buscar_producto", "info_producto"
+    ]:
         best_intent = "desconocido"
 
     analysis = {
@@ -232,7 +352,6 @@ def build_dynamic_response(analysis, inventario, ruta_actual):
             "Puedo ayudarte a consultar inventario, buscar productos, actualizar stock "
             "y orientarte dentro del sistema."
         )
-    
 
     if intent == "consultar_inventario":
         if product:
